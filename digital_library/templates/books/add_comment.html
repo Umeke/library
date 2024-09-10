@@ -1,0 +1,59 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Add Comment" %}{% endblock %}
+
+{% block content %}
+
+  <!-- Begin | Page Content Wrapper -->
+  <main id="page-wrapper">
+    <!-- Begin | Main Container -->
+    <div class="container-fluid">
+      <!-- Begin | Page Header -->
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">{% trans "Add Comment" %}</h6>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'books:book_list' %}">{% trans "Books" %}</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'books:discussion_detail' book.id discussion.id %}">{{ discussion.title }}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{% trans "Add Comment" %}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <!-- End | Page Header -->
+
+      <!-- Begin | Add Comment Form -->
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card card-shadow">
+            <div class="card-body">
+              <h5>{{ discussion.title }}</h5>
+              <p>{{ discussion.content }}</p>
+
+              <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">{% trans "Submit Comment" %}</button>
+                <a href="{% url 'books:discussion_detail' book.id discussion.id %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End | Add Comment Form -->
+
+      <!-- Begin | Footer -->
+      <footer class="text-center mb-4">
+        © {{ current_year }} Digital Library
+      </footer>
+      <!-- End | Footer -->
+    </div>
+    <!-- End | Main Container -->
+  </main>
+  <!-- End | Page Content Wrapper -->
+
+{% endblock %}

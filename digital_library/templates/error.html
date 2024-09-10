@@ -1,0 +1,23 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Error" %}{% endblock %}
+
+{% block content %}
+  <main id="page-wrapper">
+    <div class="container-fluid">
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">Error</h6>
+        </div>
+      </div>
+
+      <div class="alert alert-danger">
+        <h5>Error Occurred</h5>
+        <p>{{ message }}</p>
+      </div>
+
+      <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+  </main>
+{% endblock %}

@@ -1,0 +1,24 @@
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+.table thead th {
+  border-bottom: none;
+}
+
+.table-border-none thead th,
+.table-border-none tbody td {
+  border: none;
+}
+
+.table-border-none {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+@include responsive-query($xs-screen) {
+  .table-cart {
+    width: 640px;
+  }
+}

@@ -1,0 +1,61 @@
+{% extends "account/base.html" %}
+
+{% load socialaccount %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+
+{% block header %}
+{% endblock header %}
+
+{% block aside %}
+{% endblock aside %}
+
+
+{% block inner %}
+
+  <!-- Begin | Page Wrapper [[ Find in core.scss ]] -->
+  <div id="wrapper" class="full-height auth-widget">
+    <!-- Begin | Auth Panel [[ Find in auth.scss ]] -->
+    <div class="card card-shadow auth-panel">
+      <h4 class="h4 mb-5">{% trans "Sign In" %}</h4>
+
+      <form class="login mb-3" method="POST" action="{% url 'account_login' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+      <br>
+        <div class="form-field d-flex">
+          <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        </div>
+        <div class="form-field">
+          <input type="submit" value="{% trans "Sign In" %}" class="btn btn-block bg-cyan">
+        </div>
+      </form>
+
+      <div class="form-field d-flex justify-content-center">
+{#        <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>#}
+{#        <a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook OAuth2</a>#}
+        <a href="#" class="btn bg-blue">
+          <i class="icon ion-social-facebook"></i>
+          <span class="ml-1">Facebook login</span>
+        </a>
+{#        <a href="{% provider_login_url 'google' %}" class="btn bg-red ml-2 ml-sm-3">#}
+{#          <i class="icon ion-social-googleplus"></i>#}
+{#          <span class="ml-1">Google login</span>#}
+{#        </a>#}
+      </div>
+      <p>Don't you have an account? <a href="{% url 'account_signup' %}" class="c-cyan">{% trans "Sign Up" %}</a></p>
+    </div>
+    <!-- End | Auth Panel -->
+  </div>
+  <!-- End | Page Wrapper -->
+
+
+{% endblock %}
+

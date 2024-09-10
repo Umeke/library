@@ -1,0 +1,152 @@
+#sidebar {
+  @include fixed(top 0 left 0 bottom 0);
+  width: $sidebar-width;
+  background-color: $white;
+  box-shadow: 5px 0 5px -5px rgba($black, 0.1);
+  transition: all .5s;
+  z-index: $sidebar-z-index;
+  .user-thumb {
+    padding: 30px 16px;
+  }
+  #white-logo {
+    display: none;
+  }
+}
+
+/* Sidebar styling */
+@mixin sidebar {
+  width: $sidebar-width;
+  #sidebar-nav {
+    .nav-head {
+      display: block;
+    }
+    ul > li {
+      height: auto;
+      overflow: visible;
+      > a {
+        text-align: left;
+        i {
+          font-size: 16px;
+        }
+        span {
+          display: inline-block;
+        }
+        &.sub-nav:after {
+          display: block;
+        }
+      }
+    }
+  }
+  .user-thumb {
+    @include display-flex;
+    text-align: left;
+    padding: 30px 16px;
+    img {
+      margin: 0;
+    }
+    .user-desc {
+      display: block;
+    }
+  }
+  .navbar-brand {
+    justify-content: flex-start;
+    width: $sidebar-width;
+    span {
+      display: block;
+    }
+  }
+}
+
+/* Mixin for mini sidebar */
+@mixin mini-sidebar {
+  #sidebar {
+    width: $mini-sidebar-width;
+    #sidebar-nav {
+      .nav-head {
+        display: none;
+      }
+      ul > li {
+        height: 54px;
+        overflow: hidden;
+        > a {
+          text-align: center;
+          i {
+            font-size: 24px;
+          }
+          span {
+            display: none;
+          }
+          &.sub-nav:after {
+            display: none;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      @include sidebar;
+    }
+
+    .user-thumb {
+      display: block;
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0;
+      img {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .user-desc {
+        display: none;
+      }
+    }
+  }
+
+  #page-wrapper, #header {
+    margin-left: $mini-sidebar-width;
+  }
+
+  .navbar-brand {
+    justify-content: center;
+    width: $mini-sidebar-width;
+    span {
+      display: none;
+    }
+  }
+}
+
+.js-mini-sidebar {
+  @include mini-sidebar;
+}
+
+// Responsive sidebar styling
+@include responsive-query($xl-screen) {
+  @include mini-sidebar;
+  .js-mini-sidebar {
+    #sidebar {
+      @include sidebar;
+    }
+    #page-wrapper, #header {
+      margin-left: $sidebar-width;
+      margin-right: -($sidebar-width - $mini-sidebar-width);
+    }
+  }
+}
+
+@include responsive-query($lg-screen) {
+  #sidebar {
+    @include sidebar;
+    left: -($sidebar-width + 10px);
+  }
+  #page-wrapper, #header {
+    margin-left: 0;
+  }
+  .js-mini-sidebar {
+    #sidebar {
+      left: 0;
+    }
+    #page-wrapper, #header {
+      margin-right: -$sidebar-width;
+    }
+  }
+}

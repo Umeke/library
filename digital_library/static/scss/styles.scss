@@ -1,0 +1,254 @@
+/*!
+ *
+ * Dashto: (http://kri8thm.com/html/dashto/theme)
+ * Author: Kri8thm (kri8thm.com) <kri8thm@gmail.com>
+ * Version: 2.0
+ * Written by: Kri8thm
+ * ---------------------------------------------------------------- */
+
+/*!
+ * CSS Table of contents
+ *
+ * --- Comman files
+ * 01. Variable
+ * 02. Mixins
+ * 03. Reset
+ * 04. Core
+ *
+ * -- Utilities
+ * 05. Animations
+ * 06. Typography
+ * 07. Color
+ *
+ * --- Componemts
+ * 08. Loading
+ * 09. Header
+ * 10. Search
+ * 11. Navbar
+ * 12. Sidebar
+ * 13. Dropdown
+ * 14. Thumbnail
+ * 15. Button
+ * 16. Message
+ * 17. Card
+ * 18. Table
+ * 19. Form
+ * 20. Custom Form
+ * 21. Carousel
+ * 22. Pagination
+ * 23. Collapse
+ * 24. Right Sidebar
+ *
+ * --- Modules
+ * 25. Charts
+ * 26. Authentication
+ * 27. Invoice
+ * 28. Data Table
+ * 29. HTML Editor
+ * 30. 404
+ *
+ * --- App
+ * 31. Todo
+ * 32. Weather
+ * 33. Calendar
+ * 34. Chat
+ * 35. Inbox
+ * 36. contact
+ *
+ * --- Layout
+ * 37. Skins
+ * 38. Dark Sidebar
+ *
+ */
+
+/*!
+ * -- 01. Variable --
+ * -------------------------------------------------- */
+@import "base/variable";
+
+/*!
+ * -- 02. Mixins --
+ * -------------------------------------------------- */
+@import "base/mixins";
+
+/*!
+ * -- 03. Reset --
+ * -------------------------------------------------- */
+@import "base/reset";
+
+/*!
+ * -- 04. Core --
+ * -------------------------------------------------- */
+@import "base/core";
+
+/*!
+ * -- 05. Animation --
+ * -------------------------------------------------- */
+@import "utils/animation";
+
+/*!
+ * -- 06. Typography --
+ * -------------------------------------------------- */
+@import "utils/type";
+
+/*!
+ * -- 07. Color --
+ * -------------------------------------------------- */
+@import "utils/color";
+
+/*!
+ * -- 08. Loader --
+ * -------------------------------------------------- */
+@import "component/loader";
+
+/*!
+ * -- 09. Header --
+ * -------------------------------------------------- */
+@import "component/header";
+
+/*!
+ * -- 10. Search --
+ * -------------------------------------------------- */
+@import "component/search";
+
+/*!
+ * -- 11. Navbar --
+ * -------------------------------------------------- */
+@import "component/navbar";
+
+/*!
+ * -- 12. Sidebar --
+ * -------------------------------------------------- */
+@import "component/sidebar";
+
+/*!
+ * -- 13. Dropdown --
+ * -------------------------------------------------- */
+@import "component/dropdown";
+
+/*!
+ * -- 14. Thumbnail --
+ * -------------------------------------------------- */
+@import "component/thumbnail";
+
+/*!
+ * -- 15. Button --
+ * -------------------------------------------------- */
+@import "component/button";
+
+/*!
+ * -- 16. Message --
+ * -------------------------------------------------- */
+@import "component/message";
+
+/*!
+ * -- 17. Card --
+ * -------------------------------------------------- */
+@import "component/card";
+
+/*!
+ * -- 18. Table --
+ * -------------------------------------------------- */
+@import "component/table";
+
+/*!
+ * -- 19. Form --
+ * -------------------------------------------------- */
+@import "component/form";
+
+/*!
+ * -- 20. Custom Form --
+ * -------------------------------------------------- */
+@import "component/custom-form";
+
+/*!
+ * -- 21. Carousel --
+ * -------------------------------------------------- */
+@import "component/carousel";
+
+/*!
+ * -- 22. Pagination --
+ * -------------------------------------------------- */
+@import "component/pagination";
+
+/*!
+ * -- 23. Collapse --
+ * -------------------------------------------------- */
+@import "component/collapse";
+
+/*!
+ * -- 24. Right Sidebar --
+ * -------------------------------------------------- */
+@import "component/right-sidebar";
+
+/*!
+ * -- 25. Charts --
+ * -------------------------------------------------- */
+@import "modules/charts";
+
+/*!
+ * -- 26. Authentication --
+ * -------------------------------------------------- */
+@import "modules/auth";
+
+/*!
+ * -- 27. Invoice --
+ * -------------------------------------------------- */
+@import "modules/invoice";
+
+/*!
+ * -- 28. Data Table --
+ * -------------------------------------------------- */
+@import "modules/data-table";
+
+/*!
+ * -- 29. HTML Editor --
+ * -------------------------------------------------- */
+@import "modules/editor";
+
+/*!
+ * -- 30. 404 --
+ * -------------------------------------------------- */
+@import "modules/404";
+
+/*!
+ * -- 31. Todo --
+ * -------------------------------------------------- */
+@import "app/todo";
+
+/*!
+ * -- 32. Weather --
+ * -------------------------------------------------- */
+@import "app/weather";
+
+/*!
+ * -- 33. Calendar --
+ * -------------------------------------------------- */
+@import "app/calendar";
+
+/*!
+ * -- 34. Chat --
+ * -------------------------------------------------- */
+@import "app/chat";
+
+/*!
+ * -- 35. Inbox --
+ * -------------------------------------------------- */
+@import "app/inbox";
+
+/*!
+ * -- 36. Contact --
+ * -------------------------------------------------- */
+@import "app/contact";
+
+/*!
+ * -- 37. Skins --
+ * -------------------------------------------------- */
+@import "layout/skins";
+
+/*!
+ * -- 38. Dark Sidebar --
+ * -------------------------------------------------- */
+@import "layout/dark-sidebar";
+
+@import "base/homepage";

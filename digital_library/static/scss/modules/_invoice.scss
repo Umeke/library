@@ -1,0 +1,63 @@
+#invoice {
+  max-width: 960px;
+  width: 100%;
+}
+
+.invoice-header {
+  display: flex;
+  align-items: flex-start;
+  padding: 48px 24px 16px;
+  .invoice-info {
+    margin-left: auto;
+    text-align: right;
+    .invoice-number {
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    .invoice-date {
+      margin-top: 8px;
+      span {
+        font-weight: 600;
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+.invoice-body {
+  padding: 32px 24px;
+  .invoice-address {
+    line-height: 1.8;
+  }
+  .table {
+    margin-top: 32px;
+    tbody + tbody {
+      border-width: 1px;
+    }
+    tr {
+      th, td {
+        border: none;
+      }
+      th {
+        background-color: lighten($blue, 15%);
+        color: $white;
+      }
+    }
+  }
+}
+
+.invoice-footer {
+  padding: 16px 24px 48px;
+  .btns {
+    margin-top: 32px;
+    justify-content: flex-end;
+  }
+}
+
+@include  responsive-query($md-screen) {
+  .invoice-body {
+    .invoice-address + .invoice-address {
+      margin-top: 24px;
+    }
+  }
+}

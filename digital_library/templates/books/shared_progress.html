@@ -1,0 +1,57 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Shared Reading Progress" %}{% endblock %}
+
+{% block content %}
+<main id="page-wrapper">
+  <div class="container-fluid">
+    <!-- Page Header -->
+    <div class="page-header d-flex">
+      <div class="heading page-header-item">
+        <h6 class="h6">Shared Reading Progress</h6>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Shared Progress</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <!-- End Page Header -->
+
+    <!-- Begin | Shared Progress List -->
+    <div class="row">
+      {% if shared_books %}
+        {% for progress in shared_books %}
+          <!-- Begin | Column for Each User's Shared Progress -->
+          <div class="col-lg-4">
+            <!-- Begin | Card for User's Progress -->
+            <div class="card card-shadow product card-h-100 p-3">
+              <div class="product-desc">
+                <h5>{{ progress.book.title }}</h5>
+                <p>
+                  <strong>By: {{ progress.book.author }}</strong>
+                </p>
+                <p><strong>User:</strong> {{ progress.user.username }}</p>
+                <p><strong>Progress:</strong> {{ progress.progress }}%</p>
+                {% if progress.is_finished %}
+                  <p><strong>Status:</strong> Finished</p>
+                {% else %}
+                  <p><strong>Status:</strong> In Progress</p>
+                {% endif %}
+                <p><strong>Last Updated:</strong> {{ progress.updated_at|date:"d M, Y" }}</p>
+              </div>
+            </div>
+            <!-- End | Card for User's Progress -->
+          </div>
+          <!-- End | Column for Each User's Shared Progress -->
+        {% endfor %}
+      {% else %}
+        <p>No shared progress found.</p>
+      {% endif %}
+    </div>
+    <!-- End | Shared Progress List -->
+  </div>
+</main>
+{% endblock %}

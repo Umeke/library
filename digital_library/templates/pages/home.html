@@ -1,0 +1,139 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Digital Library" %}{% endblock %}
+
+{% block content %}
+
+  <!-- Begin | Page Content Wrapper -->
+  <main id="page-wrapper">
+    <!-- Begin | Main Container -->
+    <div class="container-fluid">
+
+      <!-- Recommended Books Section -->
+      {% if recommended_books %}
+      <section class="mb-4">
+        <div class="page-header d-flex">
+          <div class="heading page-header-item">
+            <h6 class="h6">Recommended Books for You</h6>
+          </div>
+        </div>
+        <div class="row">
+          {% for book in recommended_books %}
+          <div class="col-lg-4">
+            <div class="card card-shadow product card-h-100 p-3">
+              <div class="product-img">
+                <img src="{% if book.cover_image %}{{ book.cover_image.url }}{% else %}{% static 'img/products/1.jpg' %}{% endif %}" alt="Book Cover">
+              </div>
+              <div class="product-desc">
+                <span class="title-midd text-truncate">{{ book.title }}</span>
+                <p>{{ book.author }}</p>
+              </div>
+              <div class="card-footer text-right">
+                <a href="{% url 'books:book_detail' book.id %}" class="btn btn-info btn-sm">View Book</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      <!-- Top Gaming Books Section -->
+      <section class="mb-4">
+        <div class="page-header d-flex">
+          <div class="heading page-header-item">
+            <h6 class="h6">Top Gaming Books</h6>
+          </div>
+        </div>
+        <div class="row">
+          {% for book in top_gaming_books %}
+          <div class="col-lg-4">
+            <div class="card card-shadow product card-h-100 p-3">
+              <div class="product-img">
+                <img src="{% if book.cover_image %}{{ book.cover_image.url }}{% else %}{% static 'img/products/1.jpg' %}{% endif %}" alt="Book Cover">
+              </div>
+              <div class="product-desc">
+                <span class="title-midd text-truncate">{{ book.title }}</span>
+                <p>{{ book.author }}</p>
+                <p>Played {{ book.play_count }} times</p>
+              </div>
+              <div class="card-footer text-right">
+                <a href="{% url 'game:ask_local_question' book.id %}" class="btn btn-primary btn-sm">Play Game</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Top Progress Books Section -->
+      <section class="mb-4">
+        <div class="page-header d-flex">
+          <div class="heading page-header-item">
+            <h6 class="h6">Top Progress Books</h6>
+          </div>
+        </div>
+        <div class="row">
+          {% for book in top_progress_books %}
+          <div class="col-lg-4">
+            <div class="card card-shadow product card-h-100 p-3">
+              <div class="product-img">
+                <img src="{% if book.cover_image %}{{ book.cover_image.url }}{% else %}{% static 'img/products/1.jpg' %}{% endif %}" alt="Book Cover">
+              </div>
+              <div class="product-desc">
+                <span class="title-midd text-truncate">{{ book.title }}</span>
+                <p>{{ book.author }}</p>
+                <p>{{ book.progress_count }} users tracking this book</p>
+              </div>
+              <div class="card-footer text-right">
+                <a href="{% url 'books:add_edit_progress' book.id %}" class="btn btn-secondary btn-sm">Track Progress</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Most Discussed Books Section -->
+      <section class="mb-4">
+        <div class="page-header d-flex">
+          <div class="heading page-header-item">
+            <h6 class="h6">Most Discussed Books</h6>
+          </div>
+        </div>
+        <div class="row">
+          {% for book in most_discussed_books %}
+          <div class="col-lg-4">
+            <div class="card card-shadow product card-h-100 p-3">
+              <div class="product-img">
+                <img src="{% if book.cover_image %}{{ book.cover_image.url }}{% else %}{% static 'img/products/1.jpg' %}{% endif %}" alt="Book Cover">
+              </div>
+              <div class="product-desc">
+                <span class="title-midd text-truncate">{{ book.title }}</span>
+                <p>{{ book.author }}</p>
+                <p>{{ book.discussion_count }} discussions</p>
+              </div>
+              <div class="card-footer text-right">
+                <a href="{% url 'books:discussion_list' book.id %}" class="btn btn-info btn-sm">View Discussions</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- Begin | Footer -->
+      <footer class="text-center mb-4">
+        © {{ current_year }} Digital Library
+      </footer>
+      <!-- End | Footer -->
+
+    </div>
+    <!-- End | Main Container -->
+  </main>
+  <!-- End | Page Content Wrapper -->
+
+{% endblock %}

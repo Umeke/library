@@ -1,0 +1,111 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Books" %}{% endblock %}
+
+{% block content %}
+
+  <!-- Begin | Page Content Wrapper -->
+  <main id="page-wrapper">
+    <!-- Begin | Main Container -->
+    <div class="container-fluid">
+      <!-- Begin | Page Header -->
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">Books</h6>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'books:book_list' %}">Books</a></li>
+              <li class="breadcrumb-item active" aria-current="page">All Books</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="page-header-item ml-auto">
+          <a href="{% url 'books:book_create' %}" class="btn btn-primary">Add New Book</a>
+        </div>
+      </div>
+      <!-- End | Page Header -->
+
+      <!-- Begin | Row for Books -->
+      <div class="row">
+        {% for book in books %}
+          <!-- Begin | Column -->
+          <div class="col-lg-4">
+            <!-- Begin | Book Card -->
+            <div class="card card-shadow product card-h-100 p-3">
+              <div class="product-img">
+                <img src="
+      {% if book.cover_image %}{{ book.cover_image.url }}{% else %}{% static 'img/products/1.jpg' %}{% endif %}"
+                     alt="Book Cover">
+                <ul class="product-option">
+                  {% if book.owner == request.user %}
+                    <li>
+                      <a href="{% url 'books:book_update' book.id %}" data-toggle="tooltip" data-placement="top"
+                         title="Edit Book"><i class="mi mi-edit"></i></a>
+                    </li>
+                    <li>
+                      <a href="{% url 'books:add_edit_progress' book.id %}" data-toggle="tooltip" data-placement="top"
+                         title="Track Progress"><i class="mi mi-track-changes"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{% url 'books:add_to_finished_books' book.id %}" data-toggle="tooltip"
+                         data-placement="top" title="Finish Book"><i class="mi mi-check-circle"></i>
+                      </a>
+                    </li>
+                  {% else %}
+                    <li>
+                      <a href="{% url 'books:create_exchange_request' book.id %}" data-toggle="tooltip"
+                         data-placement="top" title="Request Exchange"><i class="mi mi-swap-horiz"></i>
+                      </a>
+                    </li>
+                  {% endif %}
+                  <li>
+                    <a href="{% url 'books:discussion_list' book.id %}" data-toggle="tooltip" data-placement="top"
+                       title="View Discussions"><i class="mi mi-message"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="product-desc">
+                <span class="title-midd text-truncate">{{ book.title }}</span>
+              </div>
+              <!-- Play Game Button -->
+              <div class="card-footer">
+                <div class="d-flex justify-content-around mt-2">
+                  <!-- Leaderboard Button -->
+                  <a href="{% url 'game:view_ratings' book.id %}"
+                     class="btn btn-success btn-sm d-flex align-items-center">
+                    Leaderboard
+                  </a>
+
+                  <!-- Play Game Button -->
+                  <a href="{% url 'game:ask_local_question' book.id %}"
+                     class="btn btn-primary btn-sm d-flex align-items-center ml-2">
+                    <i class="mi mi-gamepad"></i>
+                    Play Game
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- End | Book Card -->
+          </div>
+          <!-- End | Column -->
+        {% endfor %}
+      </div>
+      <!-- End | Row for Books -->
+
+      <!-- Begin | Footer -->
+      <footer class="text-center mb-4">
+        © {{ current_year }} Digital Library
+      </footer>
+      <!-- End | Footer -->
+    </div>
+    <!-- End | Main Container -->
+  </main>
+  <!-- End | Page Content Wrapper -->
+
+{% endblock %}

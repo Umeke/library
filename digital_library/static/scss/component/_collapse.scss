@@ -1,0 +1,64 @@
+.collapse-card {
+  border-radius: 8px;
+  overflow: hidden;
+  + .collapse-card {
+    margin-top: 16px;
+  }
+  .collapse-header {
+    @include display-flex;
+    cursor: pointer;
+    padding: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  .collapse-body {
+    padding: 16px 24px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  .collapse-arrow {
+    transition: all .2s;
+  }
+  .collapse-remove {
+    display: none;
+  }
+  &.active {
+    .collapse-arrow {
+      transform: rotate(180deg);
+    }
+    .collapse-add {
+      display: none;
+    }
+    .collapse-remove {
+      display: block;
+    }
+  }
+}
+
+.collapse-border {
+  .collapse-card {
+    border: 1px solid $gray-400;
+    .collapse-header:hover {
+      background-color: $gray-200;
+    }
+    .collapse-body {
+      border-top: 1px solid $gray-400;
+    }
+  }
+}
+
+// Collapse colors
+@each $tuple in $colors-config {
+  .collapse-#{nth($tuple, 1)} {
+    .collapse-body {
+      border: 1px solid nth($tuple, 2);
+    }
+    .collapse-header {
+      background-color: nth($tuple, 2);
+      color: $white;
+      .btn {
+        color: $white;
+      }
+    }
+  }
+}

@@ -1,0 +1,359 @@
+// Inbox styling
+.inbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  .inbox-left {
+    @include flex(18%);
+    padding: 40px 16px;
+    box-shadow: 5px 0 5px -5px rgba($black, 0.1);
+  }
+  .inbox-right {
+    @include flex(82%);
+    padding-top: 16px;
+    padding-bottom: 24px;
+  }
+  .inbox-nav {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid $gray-200;
+    li {
+      position: relative;
+      + li {
+        margin-top: 4px;
+      }
+      a {
+        display: block;
+        padding: 8px 16px;
+        border-radius: 32px;
+      }
+      &.active {
+        a {
+          background-color: rgba($blue, .1);
+          color: $blue;
+          font-weight: 600;
+        }
+      }
+      .badge {
+        @include absolute(right 16px top 9px)
+      }
+    }
+  }
+  .inbox-header {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding: 8px 16px;
+    .inbox-header-option {
+      @include display-flex;
+      margin-left: auto;
+    }
+  }
+  .inbox-option {
+    @include display-flex;
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid $gray-300;
+    #inbox-back {
+      display: none;
+    }
+    #mail-check {
+      top: -4px;
+      position: relative;
+    }
+    > li {
+      margin-right: 16px;
+    }
+  }
+  .inbox-footer {
+    padding: 16px;
+    padding-bottom: 0;
+  }
+}
+
+// Inbox pagination styling
+.inbox-pagination {
+  @include display-flex;
+  .page-arrow {
+    margin-right: 16px;
+    margin-left: 8px;
+    height: 24px;
+    a {
+      float: left;
+      display: inline-block;
+    }
+  }
+}
+
+// Mail item styling
+.mail-item {
+  @include display-flex;
+  padding: 8px 16px;
+  background-color: $gray-200;
+  border-bottom: 1px solid $gray-300;
+  cursor: pointer;
+  &.unread {
+    background-color: transparent;
+    font-weight: 600;
+  }
+  .mail-tag {
+    @include display-flex;
+    @include flex(28%);
+    li {
+      .cf-checkbox {
+        top: -4px;
+      }
+      + li {
+        margin-left: 16px;
+      }
+    }
+  }
+  .mail-name {
+    width: 50%;
+  }
+  .mail-content {
+    @include flex(57%);
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .mail-info {
+    @include display-flex;
+    margin-left: auto;
+    > li + li {
+      margin-left: 8px;
+    }
+  }
+}
+
+// Informative app label styling
+.app-labels {
+  li {
+    position: relative;
+    padding-left: 20px;
+    &:after {
+      @extend %attr-content;
+      left: 4px;
+      top: 6px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    + li {
+      margin-top: 8px;
+    }
+  }
+}
+
+// Mail details styling
+.mail-subject {
+  padding: 16px 16px 16px 54px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.mail-from {
+  border-bottom: 1px solid $gray-300;
+  .user-thumb {
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+.mail-desc {
+  border-bottom: 1px solid $gray-300;
+  .mail-attachment {
+    @include display-flex;
+    li {
+      padding: 8px;
+      .attachment-file {
+        @include display-flex;
+        border: 1px solid theme-color(secondery);
+        border-radius: 4px;
+        padding: 8px 16px;
+        .file-info {
+          padding-left: 8px;
+        }
+      }
+      .attach-img {
+        display: block;
+        img {
+          border-radius: 4px;
+          max-height: 54px;
+        }
+      }
+    }
+  }
+}
+
+// Compose mail box styling
+.compose-mail {
+  @include fixed(right 16px bottom 0);
+  display: none;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 1px 4px 0 rgba($black, .1);
+  .compose-mail-header {
+    @include display-flex;
+    min-height: 32px;
+    background-color: $gray;
+    color: $white;
+    padding: 8px 16px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    .compose-mail-option {
+      @include display-flex;
+      margin-left: auto;
+      li + li {
+        margin-left: 8px;
+      }
+      a {
+        @include display-flex;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        color: $white;
+        &:hover {
+          background-color: rgba($white, .3);
+        }
+      }
+    }
+  }
+  .compose-mail-body {
+    background-color: $white;
+    padding: 16px;
+    .form-control {
+      border: none;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    .input-line {
+      border-radius: 0;
+      padding-left: 0;
+      padding-right: 0;
+      border-bottom: 1px solid $gray-500;
+    }
+    .input-group {
+      align-items: center;
+    }
+    .toolbar-dropdown .toolbar-dropdown-menu {
+      bottom: 100%;
+      top: auto;
+      &.more-dropdown-menu {
+        bottom: 130%;
+      }
+    }
+  }
+}
+
+#mailbox-details {
+  display: none;
+}
+
+.js-show-mail {
+  #mailbox, #mail-check {
+    display: none;
+  }
+  #mailbox-details, #inbox-back {
+    display: block !important;
+  }
+}
+
+.minimize {
+  .compose-mail-body {
+    display: none;
+  }
+}
+
+// Responsive inbox styling
+@include responsive-query($lg-screen) {
+  .mail-item {
+    .mail-tag {
+      @include flex(35%);
+    }
+    .mail-content {
+      @include flex(50%);
+    }
+  }
+}
+
+@include responsive-query($md-screen) {
+  .inbox {
+    .inbox-left {
+      @include flex(30%);
+    }
+    .inbox-right {
+      @include flex(70%);
+    }
+  }
+  .mail-item {
+    .mail-tag {
+      @include flex(100%);
+    }
+    .mail-content {
+      @include flex(75%);
+      padding-left: 0;
+    }
+  }
+  .compose-mail {
+    max-width: 400px;
+    #editor {
+      height: 180px;
+    }
+    .color-dropdown {
+      left: -50px;
+    }
+  }
+}
+
+@include responsive-query($sm-screen) {
+  .inbox {
+    .inbox-left {
+      @include flex(35%);
+    }
+    .inbox-right {
+      @include flex(65%);
+    }
+    .inbox-header {
+      .inbox-header-option {
+        margin-left: 0;
+        margin-top: 16px;
+      }
+    }
+  }
+  .mail-item {
+    .mail-content {
+      @include flex(63%);
+    }
+  }
+}
+
+@include responsive-query($xs-screen) {
+  .inbox {
+    .inbox-left, .inbox-right {
+      @include flex(100%);
+    }
+    .inbox-left {
+      border-bottom: 1px solid $gray-300;
+    }
+  }
+  .mail-item {
+    .mail-content {
+      @include flex(56%);
+      padding-right: 16px;
+    }
+  }
+}
+
+@include responsive-query($xxs-screen) {
+  .compose-mail {
+    left: 16px;
+    width: auto;
+    #editor {
+      height: 130px;
+    }
+  }
+}

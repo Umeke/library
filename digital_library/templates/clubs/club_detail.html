@@ -1,0 +1,82 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% block head_title %}{{ club.name }}{% endblock %}
+
+{% block content %}
+  <main id="page-wrapper">
+    <div class="container-fluid">
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">{{ club.name }}</h6>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">{% trans "Dashboard" %}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ club.name }}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Begin Club Details -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card card-shadow p-4">
+            <h6 class="h6 card-title">{{ club.name }}</h6>
+            <p>{{ club.description }}</p>
+            <p><strong>{% trans "Created by:" %}</strong> {{ club.creator.username }}</p>
+            <p><strong>{% trans "Members:" %}</strong> {{ club.members.count }}</p>
+
+            <!-- Show manage requests link if the user is the club creator -->
+            {% if request.user == club.creator %}
+              <div class="d-flex justify-content-start mt-3">
+                <a href="{% url 'clubs:manage_membership_requests' club.id %}" class="btn btn-primary me-2">
+                  {% trans "Manage Membership Requests" %}
+                </a>
+              </div>
+            {% endif %}
+
+            <!-- List of Members -->
+            <h6 class="h6 mt-4">{% trans "Members" %}</h6>
+            <ul class="list-group list-group-flush mb-4">
+              {% for member in club.members.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ member.username }}
+                </li>
+              {% endfor %}
+            </ul>
+
+            <!-- List of Posts -->
+            <h6 class="h6">{% trans "Posts" %}</h6>
+            <ul class="list-group list-group-flush mb-4">
+              {% for post in posts %}
+                <li class="list-group-item">
+                  <strong>{{ post.author.username }}:</strong> {{ post.content }}
+                  <small class="text-muted d-block">({{ post.created_at|date:"d M Y H:i" }})</small>
+                </li>
+              {% empty %}
+                <li class="list-group-item">{% trans "No posts yet." %}</li>
+              {% endfor %}
+            </ul>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-start mt-3">
+              {% if request.user in club.members.all %}
+                <a href="{% url 'clubs:club_post_create' club.id %}" class="btn btn-primary me-2">
+                  {% trans "Add a Post" %}
+                </a>
+              {% endif %}
+              <a href="{% url 'clubs:club_list' %}" class="btn btn-secondary">
+                {% trans "Back to Clubs List" %}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Club Details -->
+
+      <footer class="text-center mb-4">
+        © 2024 Digital Library
+      </footer>
+    </div>
+  </main>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% block head_title %}{% trans "Game Result" %}{% endblock %}
+
+{% block content %}
+  <main id="page-wrapper">
+    <div class="container-fluid">
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">Game Result</h6>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Result</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Begin | Row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card card-shadow p-3">
+            <h6 class="h6 card-title">Your Game Result</h6>
+            <p>You scored {{ score }} out of {{ total_questions }}.</p>
+
+            <!-- Show correct and incorrect answers -->
+            <h6 class="h6">Review your answers:</h6>
+            <ul class="list-group">
+              {% for question, user_answer, correct_answer in results %}
+                <li class="list-group-item">
+                  <strong>Question:</strong> {{ question }}<br>
+                  <strong>Your Answer:</strong> {{ user_answer }}<br>
+                  <strong>Correct Answer:</strong> {{ correct_answer }}
+                  {% if user_answer == correct_answer %}
+                    <span class="badge badge-success">Correct</span>
+                  {% else %}
+                    <span class="badge badge-danger">Incorrect</span>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+
+            <a href="{% url 'game:ask_local_question' book_id %}" class="btn btn-secondary mt-3">Play Again from db</a>
+            <a href="{% url 'game:restart_game' %}" class="btn btn-secondary mt-3">Restart with new data</a>
+          </div>
+        </div>
+      </div>
+      <!-- End | Row -->
+
+      <footer class="text-center mb-4">
+        © 2024 Digital Library
+      </footer>
+    </div>
+  </main>
+{% endblock %}

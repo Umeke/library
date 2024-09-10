@@ -1,0 +1,67 @@
+[class^="btn bg-"] {
+  &:hover, &:focus {
+    color: $white;
+  }
+}
+
+.btn {
+  font-size: 14px;
+}
+
+.btns {
+  @include display-flex;
+  .btn + .btn {
+    margin-left: 8px;
+  }
+}
+
+.btn-tran {
+  background-color: transparent;
+  border: none;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.btn-border {
+  border: 1px solid theme-color(secondary);
+}
+
+.btn-sm {
+  font-size: 12px;
+  line-height: 1;
+  min-height: auto;
+}
+
+.btn-lg {
+  font-size: 1.25rem;
+}
+
+.btn-secondary-border {
+  background-color: $white;
+  border-color: theme-color(secondary);
+  color: theme-color(secondary);
+  &:hover {
+    background-color: theme-color(secondary);
+    color: $white;
+  }
+}
+
+// Border buttons
+@each $tuple in $colors-config {
+  .btn-border-#{nth($tuple, 1)} {
+    color: nth($tuple, 2);
+    border-color: nth($tuple, 2);
+    background-color: $white;
+    &:hover {
+      color: $white;
+      background-color: nth($tuple, 2);
+    }
+    &:disabled, &:disabled:hover {
+      color: lighten(nth($tuple, 2), 10%);
+      border-color: lighten(nth($tuple, 2), 10%);
+      background-color: transparent;
+      cursor: not-allowed;
+    }
+  }
+}

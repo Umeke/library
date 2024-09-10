@@ -1,0 +1,131 @@
+@mixin theme-skin($color){
+  #sidebar-nav {
+    ul > li.active > a {
+      color: $color !important;
+      border-color: $color;
+      background: linear-gradient(to right, rgba($color, .15) 0%, rgba($color, 0) 100%);
+    }
+    ul > li > a.active i {
+      color: $color;
+    }
+  }
+
+  .bg-primary {
+    background-color: $color;
+    color: $white;
+  }
+
+  // Primary card style
+  .card-primary {
+    background-color: $color;
+    color: $white;
+    &.card .card-title {
+      color: $white;
+      &:after {
+        background-color: $white;
+      }
+    }
+    a {
+      color: $white;
+    }
+  }
+
+  .card .card-title {
+    color: $color;
+    &:after {
+      background-color: $color;
+    }
+  }
+
+  // Primary button style
+  .btn-primary {
+    background-color: $color;
+    border-color: $color;
+    &:hover {
+      background-color: darken($color, 10%);
+      border-color: darken($color, 10%);
+    }
+    &.focus, &:focus {
+      color: $white;
+      box-shadow: 0 0 0 0.2rem rgba($color, .5);
+    }
+  }
+
+  .btn-primary:not(:disabled):not(.disabled).active,
+  .btn-primary:not(:disabled):not(.disabled):active,
+  .show>.btn-primary.dropdown-toggle {
+    background-color: $color;
+    color: $white;
+    box-shadow: 0 0 0 0.2rem rgba($color, .5);
+  }
+
+  #revenue-chart .ct-series-a {
+    .ct-area {
+      fill: $color;
+    }
+    .ct-line {
+      stroke: $color;
+    }
+  }
+
+  // Primary table style
+  .table-primary, .table-primary>td, .table-primary>th {
+    background-color: transparent;
+  }
+  .table-primary {
+    th, td {
+      border: none;
+    }
+    th {
+      background-color: $color;
+      color: $white;
+    }
+    tbody {
+      tr:nth-child(even) {
+        background-color: lighten($color, 37%);
+      }
+    }
+  }
+
+  .owl-dot-primary.owl-theme .owl-dots {
+    .owl-dot span {
+      background: $color;
+    }
+  }
+}
+
+.theme-blue {
+  @include theme-skin($blue);
+}
+
+.theme-orange {
+  @include theme-skin($orange);
+}
+
+.theme-indigo {
+  @include theme-skin($indigo);
+}
+
+.theme-green {
+  @include theme-skin($green);
+}
+
+.theme-purple {
+  @include theme-skin($purple);
+}
+
+.theme-pink {
+  @include theme-skin($pink);
+}
+
+.theme-yellow {
+  @include theme-skin($yellow);
+}
+
+.theme-red {
+  @include theme-skin($red);
+}
+
+.theme-cyan {
+  @include theme-skin($cyan);
+}

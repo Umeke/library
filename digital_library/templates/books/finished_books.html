@@ -1,0 +1,21 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Finished Books" %}{% endblock %}
+
+{% block content %}
+<main id="page-wrapper">
+  <div class="container-fluid">
+    <h2>Finished Books</h2>
+    {% if finished_books %}
+      <ul>
+        {% for book in finished_books %}
+          <li>{{ book.book.title }} (Finished at: {{ book.finished_at|date:"d M, Y" }})</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>You haven't finished any books yet.</p>
+    {% endif %}
+  </div>
+</main>
+{% endblock %}

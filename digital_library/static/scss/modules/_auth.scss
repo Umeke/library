@@ -1,0 +1,34 @@
+.auth-widget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-panel {
+  padding: 32px;
+  width: 380px;
+  text-align: center;
+  .user-profile {
+    margin-top: -66px;
+  }
+}
+
+@include responsive-query($xs-screen) {
+  .auth-panel {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    margin: 64px auto;
+  }
+}
+
+@include responsive-query($xxs-screen) {
+  .auth-panel {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: auto;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}

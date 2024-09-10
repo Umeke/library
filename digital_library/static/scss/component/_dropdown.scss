@@ -1,0 +1,16 @@
+.dropdown-menu {
+  font-size: $font-base-size;
+  border: none;
+  box-shadow: 0 1px 4px 0 rgba($black, .1);
+  .dropdown-header {
+    border-bottom: 1px solid $gray-200;
+  }
+  .dropdown-footer {
+    padding: 8px 24px;
+    text-align: center;
+  }
+}
+
+.dropdown-lg .dropdown-menu {
+  min-width: $dropdown-menu-width;
+}

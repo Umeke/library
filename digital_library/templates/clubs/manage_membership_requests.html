@@ -1,0 +1,55 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% block head_title %}{% trans "Manage Membership Requests" %}{% endblock %}
+
+{% block content %}
+  <main id="page-wrapper">
+    <div class="container-fluid">
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">{% trans "Manage Membership Requests" %} - {{ club.name }}</h6>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card card-shadow p-3">
+            <h6 class="h6 card-title">{% trans "Pending Membership Requests" %}</h6>
+
+            <ul class="list-group">
+              {% for membership_request in membership_requests %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  {{ membership_request.user.username }}
+                  <div>
+                    <form method="POST" class="d-inline-block">
+                      {% csrf_token %}
+                      <input type="hidden" name="request_id" value="{{ membership_request.id }}">
+                      <button type="submit" name="action" value="approve" class="btn btn-success btn-sm">
+                        {% trans "Approve" %}
+                      </button>
+                    </form>
+                    <form method="POST" class="d-inline-block">
+                      {% csrf_token %}
+                      <input type="hidden" name="request_id" value="{{ membership_request.id }}">
+                      <button type="submit" name="action" value="reject" class="btn btn-danger btn-sm">
+                        {% trans "Reject" %}
+                      </button>
+                    </form>
+                  </div>
+                </li>
+              {% empty %}
+                <li class="list-group-item">{% trans "No pending requests." %}</li>
+              {% endfor %}
+            </ul>
+
+            <a href="{% url 'clubs:club_detail' club.id %}" class="btn btn-secondary mt-3">{% trans "Back to Club" %}</a>
+          </div>
+        </div>
+      </div>
+
+      <footer class="text-center mb-4">
+        © 2024 Digital Library
+      </footer>
+    </div>
+  </main>
+{% endblock %}

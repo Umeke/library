@@ -1,0 +1,58 @@
+// Background solid colors
+@each $tuple in $colors-config {
+  .bg-#{nth($tuple, 1)} {
+    background-color: nth($tuple, 2);
+    color: $white;
+    &.btn {
+      &:hover {
+        background-color: darken(nth($tuple, 2), 5%);
+        color: $white;
+      }
+      &:disabled, &:disabled:hover {
+        background-color: lighten(nth($tuple, 2), 10%);
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// Background solid colors
+@each $tuple in $colors-config {
+  .c-#{nth($tuple, 1)} {
+    color: nth($tuple, 2);
+  }
+}
+
+// Input switch background colors
+@each $tuple in $colors-config {
+  .switch-#{nth($tuple, 1)} {
+    &:checked ~ label {
+      background-color: rgba((nth($tuple, 2)), .4);
+      &:after {
+        left: 20px;
+        background-color: nth($tuple, 2);
+      }
+    }
+  }
+}
+
+// Labels dot color
+@each $tuple in $colors-config {
+  .label-#{nth($tuple, 1)} {
+    &:after {
+      background-color: nth($tuple, 2);
+    }
+  }
+}
+
+// Social card color
+@each $tuple in $social-colors {
+  .card-social-#{nth($tuple, 1)} {
+    background-color: nth($tuple, 2);
+    color: $white;
+  }
+}
+
+.c-primary {
+  color: $blue;
+}

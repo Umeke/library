@@ -1,0 +1,26 @@
+// Form control styling
+.form-control {
+  font-size: 14px;
+  height: $form-elements-height;
+  &.qua {
+    width: 80px;
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+.form-field {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+// X-Editable styling
+.form-inline.editableform label {
+  justify-content: flex-start;
+}

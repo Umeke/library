@@ -1,0 +1,61 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% block head_title %}{% trans "Clubs" %}{% endblock %}
+
+{% block content %}
+  <main id="page-wrapper">
+    <div class="container-fluid">
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">{% trans "All Clubs" %}</h6>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">{% trans "Dashboard" %}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{% trans "Clubs" %}</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="page-header-item ml-auto">
+          <a href="{% url 'clubs:club_create' %}" class="btn btn-primary">Add New Club</a>
+        </div>
+      </div>
+
+      <!-- Begin | Clubs List -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card card-shadow p-3">
+            <h6 class="h6 card-title">{% trans "All Clubs" %}</h6>
+            <ul class="list-group">
+              {% for item in club_status %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span>{{ item.club.name }}</span>
+<span class="badge badge-primary">{{ item.club.members.count }} {% trans "Members" %}</span>
+                  <!-- If user is a member, show link to club details -->
+                  {% if item.is_member %}
+                    <a href="{% url 'clubs:club_detail' item.club.id %}" class="btn btn-primary btn-sm">{% trans "View Club" %}</a>
+
+                  <!-- If the user is not a member but has already requested to join -->
+                  {% elif item.membership_requested %}
+                    <span class="badge badge-warning">{% trans "Request Pending" %}</span>
+
+                  <!-- If user is not a member and hasn't requested yet, show "Request to Join" button -->
+                  {% else %}
+                    <form method="POST" action="{% url 'clubs:request_to_join' item.club.id %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-primary btn-sm">{% trans "Request to Join" %}</button>
+                    </form>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End | Clubs List -->
+
+      <footer class="text-center mb-4">
+        © 2024 Digital Library
+      </footer>
+    </div>
+  </main>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "account/base.html" %}
+
+{% load socialaccount %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+
+{% block header %}
+{% endblock header %}
+
+{% block aside %}
+{% endblock aside %}
+
+
+{% block inner %}
+  <!-- Begin | Page Wrapper [[ Find in core.scss ]] -->
+  <div id="wrapper" class="full-height auth-widget">
+    <!-- Begin | Auth Panel [[ Find in auth.scss ]] -->
+    <div class="card card-shadow auth-panel">
+      <h4 class="h4 mb-5">{% trans "Sign Up" %}</h4>
+      <form class="signup mb-3" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <div class="form-field">
+          <input type="submit" value="{% trans "Sign Up" %}" class="btn btn-block bg-cyan">
+        </div>
+      </form>
+      <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+      </p>
+    </div>
+    <!-- End | Auth Panel -->
+  </div>
+  <!-- End | Page Wrapper -->
+
+{% endblock %}
+

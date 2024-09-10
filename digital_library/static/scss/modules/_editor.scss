@@ -1,0 +1,150 @@
+#editor {
+  border: none;
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  height: 240px;
+}
+
+.small {
+  font-size: $font-base-size * .9;
+}
+.medium {
+  font-size: $font-base-size * 1.4;
+}
+.large {
+  font-size: $font-base-size * 1.9;
+}
+.huge {
+  font-size: $font-base-size * 2.5;
+}
+
+.wysihtml-editor {
+  color: theme-color(secondary);
+  .wysiwyg-font-size-small {
+    @extend .small;
+  }
+  .wysiwyg-font-size-medium {
+    @extend .medium;
+  }
+  .wysiwyg-font-size-larger {
+    @extend .large;
+  }
+  .wysiwyg-font-size-xx-large {
+    @extend .huge;
+  }
+  b {
+    font-weight: bold;
+  }
+  i {
+    font-style: italic;
+  }
+  ul {
+    margin-left: 16px;
+    li {
+      list-style: outside;
+    }
+  }
+  ol {
+    margin-left: 16px;
+    li {
+      list-style: decimal;
+    }
+  }
+}
+
+#toolbar {
+  @include display-flex;
+  position: relative;
+  .item-toolbar {
+    @include display-flex;
+    padding: 4px;
+    border-radius: 2px;
+    &:hover, &:focus, &.wysihtml-command-dialog-opened, &.wysihtml-command-active {
+      background-color: $gray-200;
+      color: $gray-700;
+    }
+    #imageUpload {
+      display: none;
+    }
+    label {
+      height: 24px;
+      cursor: pointer;
+    }
+  }
+  .line {
+    width: 1px;
+    height: 24px;
+    background-color: $gray-200;
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}
+
+.toolbar-dropdown {
+  position: relative;
+  .toolbar-dropdown-menu {
+    @include absolute(top 100%);
+    background-color: $white;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    box-shadow: 0 1px 4px 0 rgba($black, .1);
+    border-radius: 4px;
+    &.more-dropdown-menu {
+      top: 130%;
+    }
+  }
+}
+
+.color-dropdown {
+  padding: 16px !important;
+  min-width: 176px;
+  .color-options {
+    @include display-flex;
+    a {
+      padding: 1px;
+      border: 1px solid transparent;
+      &.wysihtml-command-active {
+        border-color: $black;
+      }
+    }
+    span {
+      display: block;
+      width: 14px;
+      height: 14px;
+    }
+
+    // Color palette
+    @each $tuple in $color-palette {
+      .#{nth($tuple, 1)} {
+        background-color: nth($tuple, 2);
+      }
+    }
+  }
+}
+
+.more-dropdown {
+  position: static;
+  .more-dropdown-menu {
+    @include display-flex;
+    padding-left: 8px;
+    padding-right: 8px;
+    min-width: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+// Set color wysihtml editor
+@each $tuple in $color-palette {
+  .wysiwyg-color-#{nth($tuple, 1)} {
+    color: nth($tuple, 2);
+  }
+}
+
+// Set text align wysihtml editor
+@each $tuple in $text-align {
+  .wysiwyg-text-align-#{nth($tuple, 1)} {
+    text-align: nth($tuple, 2);
+  }
+}

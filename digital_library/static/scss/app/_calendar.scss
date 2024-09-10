@@ -1,0 +1,166 @@
+// Bootstrap calendar styling
+#inline-calendar {
+  .datepicker-inline, .table-condensed {
+    width: 100%;
+  }
+}
+
+.datepicker {
+  table {
+    th, td {
+      padding: 8px 4px;
+      vertical-align: middle;
+    }
+    th {
+      font-weight: 600;
+    }
+  }
+}
+
+.datepicker table tr td.active.active {
+  background: $blue;
+  &:hover {
+    background: darken($blue, 10%);
+  }
+}
+
+.datepicker table tr td span.active.active {
+  background: $blue;
+  &:hover {
+    background: darken($blue, 10%);
+  }
+}
+
+.datepicker table tr td.day {
+  width: 40px;
+}
+
+.datepicker table tr td.today,
+.datepicker table tr td.today:hover:hover {
+  background: $blue;
+  color: $white;
+}
+
+.datepicker {
+  table tr td.day {
+    &.focused, &:hover {
+      background: $gray-100;
+    }
+  }
+  .datepicker-switch:hover,
+  .next:hover,
+  .prev:hover,
+  table tr td span.focused,
+  table tr td span:hover {
+    background: $gray-100;
+  }
+}
+
+// Full calendar styling
+.fc-unthemed td.fc-today {
+  background-color: $gray-100;
+}
+
+.fc-padding {
+  padding: 32px 24px;
+}
+
+.fc-row .fc-content-skeleton td {
+  padding: 4px;
+}
+
+.fc-draggable-event-list {
+  background-color: $gray-100;
+}
+
+.fc-day-header {
+  padding: 8px !important;
+}
+
+.fc-event {
+  border: none;
+  font-size: $font-base-size;
+  background-color: transparent;
+  color: theme-color(secondary);
+  cursor: grab;
+  &:hover {
+    color: theme-color(secondary);
+  }
+  .fc-content {
+    background-color: transparent;
+  }
+}
+
+.fc-event-list {
+  li + li {
+    margin-top: 16px;
+  }
+  .fc-event-title {
+    padding-left: 16px;
+    position: relative;
+    &:after {
+      @extend %attr-content;
+      top: 6px;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+    }
+  }
+}
+
+.fc-button {
+  background: none;
+  background-color: $gray-300 !important;
+  border: none;
+  text-transform: capitalize;
+  text-shadow: none;
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+  height: auto !important;
+  &:focus {
+    box-shadow: none;
+    background-color: $gray !important;
+    color: $white;
+  }
+}
+
+.fc-state-active {
+  box-shadow: none;
+  background-color: $gray !important;
+  color: $white;
+}
+
+.fc-toolbar .fc-center {
+  margin-top: 8px;
+}
+
+@each $tuple in $colors-config {
+  .fc-event-#{nth($tuple, 1)} {
+    padding: 4px;
+    border-radius: 0;
+    border-bottom: 2px solid lighten(nth($tuple, 2), 15%);
+    &:hover {
+      color: $white !important;
+      background-color: nth($tuple, 2);
+    }
+  }
+}
+
+// Responsive calendar styling
+@include responsive-query($sm-screen) {
+  .fc-toolbar {
+    .fc-center {
+      display: block;
+    }
+    .fc-left, .fc-right {
+      float: none;
+      margin-bottom: 16px;
+      &:after {
+        display: block;
+        clear: both;
+        content: '';
+      }
+    }
+  }
+}

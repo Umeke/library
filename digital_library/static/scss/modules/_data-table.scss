@@ -1,0 +1,21 @@
+.dataTables_length, .dataTables_filter {
+  margin-bottom: 16px;
+}
+
+.dataTables_length select {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.dataTables_info, .dataTables_paginate {
+  margin-top: 16px !important;
+}
+
+.dataTables_paginate .page-item.active .page-link {
+  background-color: $blue !important;
+  border-color: $blue !important;
+}
+
+.dt-bg-trans:before, .dt-bg-trans:after {
+  display: none !important;
+}

@@ -1,0 +1,21 @@
+{% extends "account/base.html" %}
+
+{% block content %}
+<main id="page-wrapper">
+  <div class="container-fluid">
+    <h2>{{ book.title }} - Track Your Progress</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="progress">Progress (in percentage):</label>
+        <input type="number" id="progress" name="progress" class="form-control" value="{{ progress.progress }}" min="0" max="100">
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="share" name="share" {% if progress.shared %}checked{% endif %}>
+        <label for="share">Share my progress with others</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Progress</button>
+    </form>
+  </div>
+</main>
+{% endblock %}

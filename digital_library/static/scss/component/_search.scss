@@ -1,0 +1,86 @@
+// Search form styling
+.search-form {
+  border-bottom: 1px solid theme-color(secondary);
+  width: 260px;
+  .btn, .form-control {
+    background-color: transparent;
+    border: none;
+    color: theme-color(secondary);
+  }
+  .btn:focus, .form-control:focus {
+    box-shadow: none;
+  }
+  .btn {
+    font-size: 18px;
+    padding-left: 0;
+  }
+  .form-control {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  #search-input {
+    flex: 1;
+    a {
+      display: none;
+    }
+  }
+}
+
+// Responsive search form styling
+@include responsive-query($xs-screen) {
+  #header {
+    .search-form {
+      width: auto;
+      border: none;
+      .input-group {
+        position: static;
+      }
+      #search-input {
+        @include display-flex;
+        position: absolute;
+        top: -100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $white;
+        z-index: 100;
+        transition: all .5s;
+        .form-control {
+          flex: 1;
+          padding-left: $main-padding / 2.5;
+          padding-right: 16px;
+        }
+        a {
+          display: block;
+          margin-right: $main-padding / 2.5;
+        }
+        &.show {
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+@include responsive-query($sm-screen) {
+  #header .search-form {
+    width: 240px;
+  }
+}
+
+@include responsive-query($xs-screen) {
+  #header .search-form {
+    width: auto;
+  }
+}
+
+@include responsive-query($xxs-screen) {
+  #header .search-form #search-input {
+    .form-control {
+      padding-left: $main-padding / 5;
+    }
+    a {
+      margin-right: $main-padding / 5;
+    }
+  }
+}

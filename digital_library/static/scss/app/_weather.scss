@@ -1,0 +1,139 @@
+// Weather styling
+.js-weather {
+  @include display-flex;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $gray-200;
+}
+
+.js-weather-left {
+  display: inline-block;
+  img, .js-temp {
+    display: inline-block;
+  }
+  .js-temp {
+    font-size: 32px;
+    margin-left: 8px;
+    .js-unit {
+      font-size: 14px;
+      font-weight: 600;
+      top: -16px;
+      letter-spacing: 1px;
+      position: relative;
+    }
+  }
+  .js-currently {
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+.js-weather-right {
+  margin-left: 64px;
+  .js-date {
+    margin-top: 2px;
+  }
+  .js-city {
+    margin-top: 8px;
+    font-weight: 600;
+  }
+}
+
+.js-weather-details {
+  @include display-flex;
+  border-bottom: 1px solid $gray-200;
+  padding: 24px 16px 0;
+  li {
+    @include flex(50%);
+    margin-bottom: 24px;
+    span {
+      display: inline-block;
+      margin-right: 16px;
+    }
+    b {
+      font-weight: 600;
+    }
+  }
+}
+
+.js-forcast-week {
+  padding-top: 16px;
+  ul {
+    @include display-flex;
+    justify-content: space-between;
+    text-align: center;
+    .js-deg {
+      font-size: 12px;
+      font-weight: 600;
+      position: relative;
+      top: -6px;
+      letter-spacing: 1px;
+    }
+    li img {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+// Weather deck styling
+#weather-deck {
+  .js-weather {
+    border: none;
+    .js-currently {
+      margin-left: 8px;
+    }
+  }
+  .js-weather-left {
+    text-align: left;
+    .wi {
+      font-size: 24px;
+    }
+    .js-temp {
+      margin-left: 0;
+      margin-top: 16px;
+    }
+  }
+  .js-weather-right {
+    margin-left: auto;
+    text-align: right;
+  }
+}
+
+// Weather card styling
+#weather-card {
+  .js-weather {
+    border: none;
+  }
+  .js-weather, .js-weather-left {
+    display: block;
+  }
+  .js-weather-left .d-flex {
+    justify-content: center;
+  }
+}
+
+// Responsive weather styling
+@include responsive-query($lg-screen) {
+  .js-forcast-week li {
+    margin-bottom: 16px;
+  }
+}
+
+@include responsive-query($xs-screen) {
+  .js-weather-details li {
+    @include flex(100%);
+  }
+}
+
+@include responsive-query($xxs-screen) {
+  .js-weather-right {
+    margin-left: 32px;
+  }
+  .js-forcast-week ul {
+    justify-content: flex-start;
+    li {
+      @include flex(25%);
+    }
+  }
+}

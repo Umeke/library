@@ -1,0 +1,29 @@
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-weight: 600;
+}
+
+// Font size classes
+@each $tuple in $icon-font-config {
+  .font-#{nth($tuple, 1)} {
+    font-size: nth($tuple, 2);
+  }
+}
+
+// Tilte classes
+@each $tuple in $title-font-config {
+  .title-#{nth($tuple, 1)} {
+    display: block;
+    font-size: nth($tuple, 2);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+}
+
+.table th {
+  font-weight: 600;
+}

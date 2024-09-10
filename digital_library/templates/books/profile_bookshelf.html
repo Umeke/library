@@ -1,0 +1,200 @@
+{% extends "account/base.html" %}
+{% load static i18n %}
+{% load socialaccount %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Profile" %}{% endblock %}
+
+{% block content %}
+
+  <!-- Begin | Page Content Wrapper -->
+  <main id="page-wrapper">
+    <!-- Begin | Main Container -->
+    <div class="container-fluid">
+      <!-- Begin | Page Header -->
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">{% trans "Profile" %}</h6>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">{% trans "Dashboard" %}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{% trans "Profile" %}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <!-- End | Page Header -->
+
+      <!-- Begin | Row -->
+      <div class="row">
+        <!-- Begin | Profile Column -->
+        <div class="col-lg-5">
+          <!-- Begin | Card Profile -->
+          <div class="card card-shadow card-profile">
+            <div class="card-img"></div>
+            <!-- Begin | User Profile -->
+            <div class="user-profile">
+              {% if request.user.profile_picture %}
+                <img src="{{ request.user.profile_picture.url }}" alt="{{ request.user.username }}"
+                     class="rounded-circle" width="40" height="40">
+              {% else %}
+                <img src="{% static 'img/anon.webp' %}" alt="{{ request.user.username }}"
+                     class="rounded-circle" width="40" height="40">
+              {% endif %}
+              <span class="title-midd mb-0">{{ request.user.get_full_name }}</span>
+              <span>{{ request.user.get_username }}</span>
+            </div>
+            <!-- End | User Profile -->
+            <!-- Begin | Card Body -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-4">
+                  <span class="title-big">10k</span>
+                  <span>{% trans "Followers" %}</span>
+                </div>
+                <div class="col-4">
+                  <span class="title-big">6k</span>
+                  <span>{% trans "Following" %}</span>
+                </div>
+                <div class="col-4">
+                  <span class="title-big">15k</span>
+                  <span>{% trans "Posts" %}</span>
+                </div>
+              </div>
+            </div>
+            <!-- End | Card Body -->
+          </div>
+          <!-- End | Card Profile -->
+
+          <!-- Begin | Card Contact Info -->
+          <div class="card card-shadow p-3">
+            <ul>
+              <li class="mb-3">
+                <span class="title-small">{% trans "Email address" %}</span>
+                <span>{{ request.user.email }}</span>
+              </li>
+              <li class="mb-3">
+                <span class="title-small">{% trans "Phone number" %}</span>
+                <span>{% if request.user.profile.phone %}{{ request.user.profile.phone }}{% else %}
+                  {% trans "Not provided" %}{% endif %}</span>
+              </li>
+              <li class="mb-3">
+                <span class="title-small">{% trans "Address" %}</span>
+                <span>{% if request.user.profile.address %}{{ request.user.profile.address }}{% else %}
+                  {% trans "Not provided" %}{% endif %}</span>
+              </li>
+            </ul>
+          </div>
+          <!-- End | Card Contact Info -->
+        </div>
+        <!-- End | Profile Column -->
+
+        <!-- Begin | Column with Progress, Finished Books, and User Books -->
+        <div class="col-lg-7">
+          <!-- Begin | Books in Progress Card -->
+          <div class="card card-shadow p-3 mb-3">
+            <h6 class="h6 card-title">{% trans "Books in Progress" %}</h6>
+            {% if progress_books %}
+              <ul>
+                {% for progress in progress_books %}
+                  <li>
+                    <strong>{{ progress.book.title }}</strong> - {{ progress.progress }}%
+                    <progress value="{{ progress.progress }}" max="100"></progress>
+                    <a href="{% url 'books:add_edit_progress' progress.book.id %}" class="btn btn-secondary btn-sm">
+                      {% trans "Edit Progress" %}
+                    </a>
+                    <a href="{% url 'books:toggle_progress_visibility' progress.book.id %}" class="btn btn-sm
+          {% if progress.shared %} btn-danger {% else %} btn-success {% endif %}">
+                      {% if progress.shared %}
+                        {% trans "Make Private" %}
+                      {% else %}
+                        {% trans "Make Public" %}
+                      {% endif %}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p>{% trans "No books in progress." %}</p>
+            {% endif %}
+
+          </div>
+          <!-- End | Books in Progress Card -->
+
+          <!-- Begin | Finished Books Card -->
+          <div class="card card-shadow p-3 mb-3">
+            <h6 class="h6 card-title">{% trans "Finished Books" %}</h6>
+            {% if finished_books %}
+              <ul>
+                {% for finished in finished_books %}
+                  <li>{{ finished.book.title }}
+                    - {% trans "Finished on" %} {{ finished.finished_at|date:"d M, Y" }} <a
+                      href="{% url 'books:remove_finished_book' finished.book.id %}" class="btn btn-danger btn-sm"
+                      title="Remove from Finished Books">
+                      <i class="icon ion-trash-b"></i></a>
+                  </li>
+
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p>{% trans "No finished books." %}</p>
+            {% endif %}
+          </div>
+          <!-- End | Finished Books Card -->
+
+          <!-- Begin | User's Books Card -->
+          <div class="card card-shadow p-3 mb-3">
+            <h6 class="h6 card-title">{% trans "Your Books" %}</h6>
+            {% if user_books %}
+              <ul>
+                {% for book in user_books %}
+                  <li>
+                    {{ book.title }}
+                    <a href="{% url 'books:toggle_visibility' book.id %}" class="btn btn-link">
+                      <i class="icon {% if book.is_visible %}ion-checkmark{% else %}ion-close{% endif %}"></i>
+                      {% if book.is_visible %}{% trans "Visible" %}{% else %}{% trans "Hidden" %}{% endif %}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p>{% trans "You have not added any books." %}</p>
+            {% endif %}
+          </div>
+          <!-- End | User's Books Card -->
+
+          <div class="card card-shadow p-3 mb-3">
+            <h6 class="h6 card-title">{% trans "Requests" %}</h6>
+            {% if pending_requests %}
+              <ul>
+                {% for req in pending_requests %}
+                  <li>
+                    Request from {{ req.requester.username }} for "{{ req.book.title }}"
+                    <p>{{ req.message }}</p>
+                    <a href="{% url 'books:accept_request' req.id %}" class="btn btn-success">Accept</a>
+                    <a href="{% url 'books:reject_request' req.id %}" class="btn btn-danger">Reject</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <p>No pending requests.</p>
+            {% endif %}
+          </div>
+
+        </div>
+        <!-- End | Column with Progress, Finished Books, and User Books -->
+      </div>
+      <!-- End | Row -->
+
+      <!-- Begin | Footer -->
+      <footer class="text-center mb-4">
+        © 2024 Digital Library
+      </footer>
+      <!-- End | Footer -->
+    </div>
+    <!-- End | Main Container -->
+  </main>
+  <!-- End | Page Content Wrapper -->
+
+{% endblock %}

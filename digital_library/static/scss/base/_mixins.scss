@@ -1,0 +1,60 @@
+// Retrieve color Sass maps
+@function theme-color($key: "primary") {
+  @return map-get($theme-colors, $key);
+}
+
+// Function for position
+@function is-valid-length($value) {
+  @return type-of($value) == "number" and not unitless($value) or index(auto initial inherit 0, $value) != false;
+}
+
+@mixin position($position, $args: ()) {
+  $offsets: top right bottom left;
+  position: $position;
+  @each $offset in $offsets {
+    $index: index($args, $offset);
+    @if $index {
+      @if $index == length($args) {
+        #{$offset}: 0;
+      }
+      @else {
+        $next: nth($args, $index + 1);
+        @if is-valid-length($next) {
+          #{$offset}: $next;
+        }
+        @else if index($offsets, $next) {
+          #{$offset}: 0;
+        }
+        @else {
+          @warn "Invalid value `#{$next}` for offset `#{$offset}`.";
+        }
+      }
+    }
+  }
+}
+
+@mixin absolute($args: ()) {
+  @include position(absolute, $args);
+}
+
+@mixin fixed($args: ()) {
+  @include position(fixed, $args);
+}
+
+@mixin display-flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@mixin flex($value) {
+  flex: 0 0 $value;
+  max-width: $value;
+}
+
+//Responsive mixins
+@mixin responsive-query($breakpoint) {
+  @media (max-width: #{$breakpoint}) {
+    @content;
+  }
+}

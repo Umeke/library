@@ -1,0 +1,55 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% block head_title %}{% trans "Leaderboard" %}{% endblock %}
+
+{% block content %}
+  <main id="page-wrapper">
+    <div class="container-fluid">
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">Leaderboard for "{{ book.title }}"</h6>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Leaderboard</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card card-shadow p-3">
+            <h6 class="h6 card-title">Top Players</h6>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Score</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for result in results %}
+                  <tr>
+                    <td>{{ result.user.username }}</td>
+                    <td>{{ result.score }}</td>
+                    <td>{{ result.date_played|date:"F j, Y, g:i a" }}</td>
+                  </tr>
+                {% empty %}
+                  <tr>
+                    <td colspan="3">No results available yet.</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <footer class="text-center mb-4">
+        © 2024 Digital Library
+      </footer>
+    </div>
+  </main>
+{% endblock %}

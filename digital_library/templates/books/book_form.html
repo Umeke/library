@@ -1,0 +1,69 @@
+{% extends "account/base.html" %}
+
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% block title %}
+  {% trans 'Add Books' %}
+{% endblock %}
+
+{% load static %}
+
+{% block content %}
+  <main id="page-wrapper">
+    <!-- Begin | Main Container -->
+    <div class="container-fluid">
+      <!-- Begin | Page Header -->
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">Books</h6>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'books:book_list' %}">Books</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                {% if book %}
+                  {% trans 'Update Book' %}
+                {% else %}
+                  {% trans 'Create Book' %}
+                {% endif %}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <!-- End | Page Header -->
+
+      <!-- Begin | Card -->
+      <div class="card card-shadow p-3">
+        <h6 class="h6 card-title">
+          {% if book %}
+            {% trans 'Update Book' %}
+          {% else %}
+            {% trans 'Create Book' %}
+          {% endif %}
+        </h6>
+
+        <!-- Book Form -->
+        <form action="{% if book %}{% url 'books:book_update' book.id %}{% else %}{% url 'books:book_create' %}{% endif %}" method="post" enctype="multipart/form-data" class="row">
+          <div class="col-xl-6 col-lg-8">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form|crispy }}
+
+            <div class="col-sm-6 form-field">
+              <div class="btns justify-content-end">
+                <input type="submit" class="btn bg-green" value="{% trans 'Save' %}">
+                <a href="{% url 'books:book_list' %}" class="btn btn-border-gray">{% trans 'Cancel' %}</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <footer class="text-center mb-4">
+        © {{ current_year }} Digital Library
+      </footer>
+    </div>
+    <!-- End | Main Container -->
+  </main>
+{% endblock %}

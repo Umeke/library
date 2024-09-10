@@ -1,0 +1,130 @@
+// Sidebar styling
+#sidebar-nav {
+  font-family: $primary-font;
+  height: calc(100vh - 184px) !important;
+  position: relative;
+  .nav-head {
+    color: $gray-800;
+    padding-top: 32px;
+    padding-bottom: 16px;
+    margin-bottom: 0;
+    .head {
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 600;
+      padding-left: 16px;
+      padding-right: 16px;
+      position: relative;
+      &:before {
+        @extend %attr-content;
+        @include absolute(left 0 top 6px);
+        height: 2px;
+        width: 12px;
+        background-color: $gray-800;
+      }
+    }
+  }
+
+  a {
+    font-weight: 500;
+    display: block;
+  }
+
+  ul {
+    > li {
+      .badge {
+        @include absolute(top 14px right 40px)
+      }
+      &.active {
+        > a {
+          font-weight: 500;
+        }
+      }
+      > a {
+        position: relative;
+        padding: 12px 24px 12px 13px;
+        border-left: 3px solid transparent;
+        > i {
+          min-width: 24px;
+          display: inline-block;
+          font-size: 16px;
+        }
+        &.active {
+          color: $gray-800;
+          i {
+            color: $blue;
+          }
+        }
+      }
+    }
+    ul {
+      padding-left: 32px;
+      background: $gray-100;
+      display: none;
+      li > a {
+        padding: 10px 24px 10px 13px;
+      }
+    }
+  }
+
+  .sub-nav {
+    position: relative;
+    &:after {
+      @extend %attr-content;
+      @include absolute(right 16px top 50%);
+      margin-top: -7px;
+      padding: 4px;
+      border-width: 1px 0 0 1px;
+      border-style: solid;
+      border-color: $gray-500;
+      transform: rotate(-135deg);
+      transition: all .5s;
+    }
+    &.active:after {
+      margin-top: -2px;
+      transform: rotate(45deg);
+    }
+  }
+}
+
+// Navber styling
+.navbar {
+  .notify {
+    @include absolute(right -2px top 2px);
+    display: block;
+    background-color: $blue;
+    border-radius: 4px;
+    border: 1px solid $gray-100;
+    width: 8px;
+    height: 8px;
+    z-index: 2;
+    + span {
+      @include absolute(right -6px top -2px);
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: $blue;
+      z-index: 1;
+      animation: pulse 2s ease-out infinite;
+    }
+  }
+}
+
+// Navbar brand styling
+.navbar-brand {
+  @include display-flex;
+  padding: 10px 16px;
+  margin-right: 0;
+  transition: all .5s;
+  &:hover {
+    color: theme-color(secondary);
+  }
+  img {
+    width: 40px;
+  }
+  span {
+    margin-left: 8px;
+    font-size: 20px;
+  }
+}

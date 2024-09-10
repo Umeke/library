@@ -1,0 +1,21 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% block head_title %}{% trans "Archive Detail" %}{% endblock %}
+
+{% block content %}
+  <main id="page-wrapper">
+    <div class="container-fluid">
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">{{ archive.title }}</h6>
+        </div>
+      </div>
+
+      <div class="card card-shadow p-3">
+        <h6 class="h6 card-title">{{ archive.title }}</h6>
+        <p>{{ archive.description }}</p>
+        <a href="{{ archive.file.url }}" class="btn btn-secondary">Download</a>
+      </div>
+    </div>
+  </main>
+{% endblock %}

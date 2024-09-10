@@ -1,0 +1,82 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load static %}
+{% block head_title %}{{ event.title }}{% endblock %}
+
+{% block content %}
+  <main id="page-wrapper">
+    <div class="container-fluid">
+      <!-- Event Header -->
+      <div class="page-header d-flex">
+        <div class="heading page-header-item">
+          <h6 class="h6">{{ event.title }}</h6>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'events:event_list' %}">Events</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ event.title }}</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="page-header-item ml-auto">
+          {% if request.user in event.participants.all %}
+            <button class="btn btn-secondary" disabled>{% trans "Already Joined" %}</button>
+          {% else %}
+            <a href="{% url 'events:join_event' event.id %}" class="btn btn-success">{% trans "Join Event" %}</a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Event Poster and Description -->
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card card-shadow mb-4">
+            <img src="
+              {% if event.poster %}{{ event.poster.url }}{% else %}{% static 'img/default_poster.jpg' %}{% endif %}"
+                 alt="{{ event.title }}" class="card-img-top img-fluid">
+            <div class="card-body">
+              <h4 class="card-title">{{ event.title }}</h4>
+              <p class="card-text"><i class="icon ion-calendar"></i> {{ event.date|date:"F j, Y, g:i a" }}</p>
+              <p class="card-text">{{ event.description }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Participants Section -->
+        <div class="col-lg-4">
+          <div class="card card-shadow mb-4">
+            <div class="card-body">
+              <h5 class="card-title"><i class="icon ion-person-stalker"></i> {% trans "Participants" %}</h5>
+              {% if event.participants.count > 0 %}
+                <ul class="list-group list-group-flush">
+                  {% for participant in event.participants.all %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <div class="d-flex align-items-center">
+                        {% if participant.profile_picture %}
+                          <img src="{{ participant.profile_picture.url }}" alt="{{ participant.username }}"
+                               class="rounded-circle" width="40" height="40">
+                        {% else %}
+                          <img src="{% static 'img/anon.webp' %}" alt="{{ participant.username }}"
+                               class="rounded-circle" width="40" height="40">
+                        {% endif %}
+                        <span class="ml-3">{{ participant.get_full_name|default:participant.username }}</span>
+                      </div>
+
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <p class="text-muted">{% trans "No participants yet." %}</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="text-center mb-4">
+        © 2024 Digital Library
+      </footer>
+    </div>
+  </main>
+{% endblock %}

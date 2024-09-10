@@ -1,0 +1,40 @@
+.theme-dark {
+  #sidebar {
+    background-color: $gray-900;
+    color: $white;
+    a {
+      color: $white;
+    }
+  }
+
+  #sidebar-nav {
+    ul ul {
+      background-color: rgba($white, .05);
+    }
+    .nav-head {
+      color: $white;
+      .head:before {
+        background-color: $white;
+      }
+    }
+    ul > li > a.active {
+      color: $gray-300;
+    }
+  }
+
+  .btn-border-blue {
+    background-color: $gray-900;
+    &:hover {
+      background-color: $blue;
+    }
+  }
+
+  #sidebar {
+    #dark-logo {
+      display: none;
+    }
+    #white-logo {
+      display: block;
+    }
+  }
+}

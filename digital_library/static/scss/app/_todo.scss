@@ -1,0 +1,130 @@
+// To do styling
+#todo-list {
+  li {
+    @include display-flex;
+    padding: 8px 0;
+    input[type="checkbox"]:checked + label {
+      text-decoration: line-through;
+    }
+    .cf-checkbox {
+      padding-right: 16px;
+      flex: 1;
+    }
+    .tl-close {
+      margin-left: auto;
+      .mi {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+// Advance to do styling
+#adv-todo-list {
+  .todo-item {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid $gray-200;
+    input[type="checkbox"]:checked + label {
+      text-decoration: line-through;
+    }
+  }
+  .todo-header {
+    @include display-flex;
+    .cf-checkbox {
+      flex: 1;
+      padding-right: 16px;
+    }
+    .tl-close {
+      margin-left: auto;
+      .mi-close {
+        font-size: 16px;
+      }
+    }
+  }
+  .todo-body {
+    padding: 2px 24px 0 25px;
+    .todo-info {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .user-list {
+      margin-top: 16px;
+      @include display-flex;
+      li {
+        .thumb-circle {
+          box-shadow: 0 2px 4px 0 rgba(0,0,0, .25);
+          border: 2px solid $white;
+          position: relative;
+          top: 0;
+          transition: all .5s;
+          &:hover {
+            top: -3px;
+            box-shadow: 0 2px 8px 0 rgba(0,0,0, .4);
+            z-index: 10;
+          }
+          &.plus-list {
+            border: none;
+            background-color: $gray-200;
+          }
+        }
+        + li {
+          margin-left: -8px;
+        }
+      }
+    }
+  }
+}
+
+// Activity styling
+#activity-scroll {
+  padding-left: 8px;
+}
+
+.activity-list {
+  position: relative;
+  padding-left: 16px;
+  &:before {
+    @extend %attr-content;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background-color: $gray-200;
+  }
+  .activity-item {
+    padding-top: 8px;
+    padding-right: 8px;
+    margin-bottom: 24px;
+    .title-small {
+      position: relative;
+      &:before {
+        @extend %attr-content;
+        left: -20px;
+        top: 2px;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: $white;
+        border: 2px solid transparent;
+      }
+      &.c-green:before {
+        border-color: $green;
+      }
+      &.c-red:before {
+        border-color: $red;
+      }
+      &.c-yellow:before {
+        border-color: $yellow;
+      }
+    }
+  }
+}
+
+.tl-label {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  background-color: $gray-300;
+}

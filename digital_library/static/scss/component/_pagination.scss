@@ -1,0 +1,17 @@
+.pagination-space {
+  .page-item + .page-item {
+    margin-left: 8px;
+  }
+}
+
+.pagination-rounded {
+  .page-item .page-link {
+    border-radius: 4px;
+  }
+}
+
+.pagination-round {
+  .page-item .page-link {
+    border-radius: 60px;
+  }
+}
